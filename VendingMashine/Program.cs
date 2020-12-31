@@ -14,7 +14,7 @@ namespace VendingMashine
             User user = new User();
             while (!exit)
             {
-                Console.WriteLine($"Please, choose a command: 0)Exit 1)Add coin 2)Take from return 3)Break operations 4)Choose you drink 5)Show report");
+                Console.WriteLine($"Please, choose a command:\n 0)Exit\n 1)Add coin\n 2)Take from return\n 3)Break operations\n 4)Choose you drink\n 5)Show report\n");
                 var choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -22,7 +22,10 @@ namespace VendingMashine
                         exit = true;
                         break;
                     case "1":
-                        Console.WriteLine("Input coin value(1,5,10)");
+                        string coins = string.Empty;
+                        foreach (int value in Settings.coinsValues)
+                            coins += value + " ";
+                        Console.WriteLine($"Input coin value( {coins})");
                         int coinValue;
                         var input = Int32.TryParse(Console.ReadLine(), out coinValue);
                         if (input)

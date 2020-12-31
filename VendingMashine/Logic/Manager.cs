@@ -9,12 +9,11 @@ namespace VendingMashine.Logic
 {
 	public class Manager : IManager
 	{
-		//only for tests
 		public SingleMashine Device;
-		private StringBuilder sb = new StringBuilder();
+		private readonly StringBuilder sb = new StringBuilder();
 		public Manager(List<Slot> slots, List<Coin> cashbox)
 		{
-			Device = SingleMashine.getInstance(slots, cashbox);
+			Device = SingleMashine.GetInstance(slots, cashbox);
 		}
 		public Dictionary<string, int> GetDrinks()
 		{
@@ -42,9 +41,11 @@ namespace VendingMashine.Logic
 			if (toReturn.Result)
 			{
 				List<Coin> coins = Device.GetChashback(toReturn.Data);
-				var resp = new Resp<List<Coin>>(coins);
-				resp.Result = true;
-				return resp;
+                var resp = new Resp<List<Coin>>(coins)
+                {
+                    Result = true
+                };
+                return resp;
 			}
 			else
 			{
@@ -122,9 +123,11 @@ namespace VendingMashine.Logic
 			{
 				Device.CurrentOrder.AddCoin(coin);
 				Device.AddCoin(coin);
-				var resp = new Resp<string>("Ok");
-				resp.Result = true;
-				return resp;
+                var resp = new Resp<string>("Ok")
+                {
+                    Result = true
+                };
+                return resp;
 			}
 			else
 			{

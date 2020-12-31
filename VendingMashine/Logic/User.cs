@@ -10,7 +10,7 @@ namespace VendingMashine.Logic
 		protected SingleMashine Device;
 		public User()
 		{
-			Device = SingleMashine.getInstance(null, null);
+			Device = SingleMashine.GetInstance(null, null);
 		}
 		public void AddToInput(Coin coin)
 		{

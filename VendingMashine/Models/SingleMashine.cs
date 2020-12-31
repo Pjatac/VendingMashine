@@ -9,7 +9,7 @@ namespace VendingMashine.Models
 		private static SingleMashine instance;
 		public List<Slot> Slots;
 		public Order CurrentOrder = new Order();
-		private List<Coin> Cashbox;
+		private readonly List<Coin> Cashbox;
 		public int[] MonetsCount;
 		public Coin Cashinput;
 		public List<Coin> Cashreturn;
@@ -29,7 +29,7 @@ namespace VendingMashine.Models
 			CurrentOrder = new Order();
 		}
 
-		public static SingleMashine getInstance(List<Slot> slots, List<Coin> cashbox)
+		public static SingleMashine GetInstance(List<Slot> slots, List<Coin> cashbox)
 		{
             if (instance == null)
             {
@@ -177,9 +177,11 @@ namespace VendingMashine.Models
 		//}
 		public Resp<int[]> PrepareCashback(int summ)
 		{
-			Resp<int[]> resp = new Resp<int[]>(null);
-			resp.Result = false;
-			int[] toReturn = new int[Settings.coinsValues.Length];
+            Resp<int[]> resp = new Resp<int[]>(null)
+            {
+                Result = false
+            };
+            int[] toReturn = new int[Settings.coinsValues.Length];
             for (int i = toReturn.Length -1; i >= 0 ; i--)
             {
 				int currentValueCount = summ / Settings.coinsValues[i];
